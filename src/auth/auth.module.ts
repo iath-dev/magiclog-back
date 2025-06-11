@@ -8,14 +8,17 @@ import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
-    UserModule,
-    PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET_KEY || 'secretKey',
-      signOptions: { expiresIn: '1d' },
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET_KEY || 'secretKey',
+        signOptions: { expiresIn: '1d' },
+      }),
     }),
+    UserModule,
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
+  exports: [AuthService, JwtModule, PassportModule],
 })
 export class AuthModule {}
