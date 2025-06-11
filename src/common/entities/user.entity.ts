@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Product } from './product.entity';
+import { UserRoleRole } from '../types/user.types';
 
 @Entity()
 export class User {
@@ -19,8 +20,8 @@ export class User {
   @Column()
   password!: string;
 
-  @Column({ default: 'user' })
-  role!: string;
+  @Column({ type: 'enum', enum: UserRoleRole, default: UserRoleRole.Buyer })
+  role!: UserRoleRole;
 
   @OneToMany(() => Product, (product) => product.owner)
   products!: Product[];

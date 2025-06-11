@@ -1,5 +1,5 @@
 import { IsEnum, IsString } from 'class-validator';
-import { UserRole } from '../types/user.types';
+import { UserRoleRole } from '../types/user.types';
 
 export class RegisterUserDto {
   @IsString()
@@ -9,6 +9,6 @@ export class RegisterUserDto {
   password!: string;
 
   @IsString()
-  @IsEnum(UserRole)
-  role!: UserRole;
+  @IsEnum(UserRoleRole)
+  role!: UserRoleRole;
 }

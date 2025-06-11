@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../users/user.service';
 import * as bcrypt from 'bcryptjs';
-import { UserEntity, JwtPayload } from '../common/types/user.types';
+import { JwtPayload } from '../common/types/user.types';
 import { AuthResponse } from '../common/types/auth.types';
 import { RegisterUserDto } from 'src/common/dto/register-user.dto';
+import { User } from 'src/common/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,7 @@ export class AuthService {
     password: string,
   ): Promise<JwtPayload | null> {
     const user = (await this.userService.findByUsername(username)) as
-      | UserEntity
+      | User
       | undefined;
     if (user && (await bcrypt.compare(password, user.password))) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
