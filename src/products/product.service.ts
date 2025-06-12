@@ -75,13 +75,13 @@ export class ProductService {
   }
 
   async create(
-    product: Partial<Product>,
+    product: Omit<Product, 'id' | 'owner'>,
     username: string,
   ): Promise<ProductResponseDto> {
     const user = await this.userService.findByUsername(username);
     if (!user) {
       throw new Error('User not found');
-    }
+    }    
 
     const newProduct = this.productRepository.create({
       ...product,
