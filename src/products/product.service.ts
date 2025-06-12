@@ -19,12 +19,33 @@ export class ProductService {
   async findAllFiltered(
     filterDto: FilterProductDto,
   ): Promise<PageResponseDto<Product>> {
-    const { name, sku, minPrice, maxPrice, page = 1, limit = 10 } = filterDto;
+    const {
+      name,
+      sku,
+      username,
+      minPrice,
+      maxPrice,
+      page = 1,
+      limit = 10,
+    } = filterDto;
 
-    const query = this.productRepository.createQueryBuilder('product');
+    const query = this.productRepository
+      .createQueryBuilder('product')
+      .leftJoin('product.owner', 'owner')
+      .select([
+        'product.id',
+        'product.name',
+        'product.sku',
+        'product.price',
+        'product.quantity',
+        'owner.username',
+      ])
+      .addSelect('owner.username', 'ownerUsername');
 
     if (name) query.andWhere('product.name LIKE :name', { name: `%${name}%` });
     if (sku) query.andWhere('product.sku = :sku', { sku });
+
+    if (username) query.andWhere('owner.username = :username', { username });
 
     if (minPrice) query.andWhere('product.price >= :minPrice', { minPrice });
     if (maxPrice) query.andWhere('product.price <= :maxPrice', { maxPrice });

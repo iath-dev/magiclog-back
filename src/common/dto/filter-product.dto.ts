@@ -11,6 +11,10 @@ export class FilterProductDto {
   sku?: string;
 
   @IsOptional()
+  @IsString()
+  username?: string;
+
+  @IsOptional()
   @Type(() => Number)
   @IsNumber()
   minPrice?: number;
