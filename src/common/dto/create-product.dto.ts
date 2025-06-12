@@ -10,7 +10,7 @@ export class CreateProductDto {
   sku!: string;
 
   @IsNumber()
-  quantity!: number;
+  stock!: number;
 
   @IsNumber()
   price!: number;

@@ -55,9 +55,9 @@ export class ProductController {
     @Body() body: CreateProductDto,
     @Request() req: AuthenticatedRequest,
   ): Promise<ProductEntity> {
-    const { name, sku, price, quantity } = body;
+    const { name, sku, price, stock } = body;
     return this.productService.create(
-      { name, sku, price, quantity },
+      { name, sku, price, stock },
       req.user.username,
     );
   }

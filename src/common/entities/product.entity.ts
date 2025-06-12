@@ -13,7 +13,7 @@ export class Product {
   sku!: string;
 
   @Column('int')
-  quantity!: number;
+  stock!: number;
 
   @Column('decimal')
   price!: number;

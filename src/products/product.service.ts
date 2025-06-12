@@ -37,7 +37,7 @@ export class ProductService {
         'product.name',
         'product.sku',
         'product.price',
-        'product.quantity',
+        'product.stock',
         'owner.username',
       ])
       .addSelect('owner.username', 'ownerUsername');
