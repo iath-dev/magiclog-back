@@ -4,14 +4,14 @@ import { IsString } from 'class-validator';
 export class LoginUserDto {
   @IsString()
   @ApiProperty({
-    example: 'usuario1',
+    example: 'admin@email.com',
     description: 'Nombre de usuario',
   })
   username!: string;
 
   @IsString()
   @ApiProperty({
-    example: 'password123',
+    example: '123456',
     description: 'Contraseña del usuario',
   })
   password!: string;
