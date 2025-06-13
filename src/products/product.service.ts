@@ -81,7 +81,7 @@ export class ProductService {
     const user = await this.userService.findByUsername(username);
     if (!user) {
       throw new Error('User not found');
-    }    
+    }
 
     const newProduct = this.productRepository.create({
       ...product,

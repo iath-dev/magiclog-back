@@ -24,8 +24,6 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get('search')
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRoleRole.Admin, UserRoleRole.Buyer)
   getFilteredProducts(
     @Query() filterDto: FilterProductDto,
   ): Promise<PageResponseDto<Product>> {
@@ -41,8 +39,6 @@ export class ProductController {
     return this.productService.findByOwner(req.user.sub);
   }
 
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRoleRole.Admin)
   @Get()
   async findAll(): Promise<ProductEntity[]> {
     return this.productService.findAll();
