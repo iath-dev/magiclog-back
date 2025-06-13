@@ -37,6 +37,12 @@ src/
 
 ## 📦 Instalación y ejecución
 
+### 🚨 Advertencia sobre variables de entorno
+
+Antes de ejecutar el proyecto, **verifica que todas las variables de entorno necesarias estén correctamente configuradas** en el archivo `.env`. Consulta el archivo `.env.development` para asegurarte de que no falte ninguna variable requerida.
+
+---
+
 ```bash
 npm install
 npm run start:dev       # desarrollo
